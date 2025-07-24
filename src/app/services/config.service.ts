@@ -49,7 +49,28 @@ export class ConfigService {
       return [];
     }
     
-    // En développement, permettre un accès de test (non sensible)
+    // En développement, permettre plusieurs méthodes de configuration
+    
+    // 1. Variables d'environnement locales (.env.local)
+    const envUsername = (globalThis as any).NG_APP_SUPER_USER_1_USERNAME;
+    const envEmail = (globalThis as any).NG_APP_SUPER_USER_1_EMAIL;
+    
+    if (envUsername && envEmail) {
+      return [{ username: envUsername, email: envEmail }];
+    }
+    
+    // 2. Configuration temporaire en localStorage (pour développement)
+    const tempUser = localStorage.getItem('temp_super_user');
+    if (tempUser) {
+      try {
+        const parsed = JSON.parse(tempUser);
+        return [{ username: parsed.username, email: parsed.email }];
+      } catch (e) {
+        console.warn('Configuration temporaire invalide');
+      }
+    }
+    
+    // 3. Fallback de développement
     return [
       { 
         username: 'dev_test', 
@@ -75,6 +96,28 @@ export class ConfigService {
     return superUsers.some(
       superUser => superUser.username === username && superUser.email === email
     );
+  }
+
+  // Méthode pour configurer temporairement un super-utilisateur (développement uniquement)
+  setTempSuperUser(username: string, email: string): void {
+    if (this.isProduction) {
+      console.error('🚨 Configuration temporaire non autorisée en production');
+      return;
+    }
+    
+    localStorage.setItem('temp_super_user', JSON.stringify({
+      username,
+      email,
+      createdAt: new Date().toISOString()
+    }));
+    
+    console.log('✅ Super-utilisateur temporaire configuré:', { username, email });
+  }
+
+  // Méthode pour supprimer la configuration temporaire
+  clearTempSuperUser(): void {
+    localStorage.removeItem('temp_super_user');
+    console.log('🗑️ Configuration temporaire supprimée');
   }
 
   // Log des configurations (seulement en développement)
