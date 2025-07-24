@@ -4,11 +4,11 @@ export const environment = {
   appVersion: '1.0.0',
   appDescription: 'Partagez vos moments précieux',
   
-  // Configuration des super-utilisateurs
+  // Configuration des super-utilisateurs (valeurs de développement non sensibles)
   superUsers: [
     {
-      username: 'Mandro97',
-      email: 'cassamb97@gmail.com'
+      username: 'dev_admin',
+      email: 'admin@localhost.dev'
     }
     // Ajoutez d'autres super-utilisateurs ici
   ],
@@ -18,12 +18,12 @@ export const environment = {
   
   // Configuration Firebase (pour future intégration)
   firebase: {
-    // Ces valeurs seront configurées via les variables d'environnement Netlify
-    // apiKey: 'configured-via-netlify',
-    // authDomain: 'configured-via-netlify',
-    // projectId: 'configured-via-netlify',
-    // storageBucket: 'configured-via-netlify',
-    // messagingSenderId: 'configured-via-netlify',
-    // appId: 'configured-via-netlify'
+    // Configuration de développement - valeurs factices
+    // apiKey: 'dev-api-key',
+    // authDomain: 'dev-project.firebaseapp.com',
+    // projectId: 'dev-project-id',
+    // storageBucket: 'dev-project.appspot.com',
+    // messagingSenderId: '000000000',
+    // appId: 'dev-app-id'
   }
 };

@@ -43,9 +43,10 @@ Thumbs.db
 
 # Environment variables
 .env
-.env.example
 .env.local
 .env.production
 .env.staging
-environment.ts
+
+# Ne pas ignorer .env.example (il doit être suivi par Git)
+# !.env.example
 environment.prod.ts

@@ -6,7 +6,7 @@ export const environment = {
   
   superUsers: [
     {
-      username: 'Mandro97',
+      username: 'admin',
       email: 'admin@photoshare.app' // Email générique pour éviter la détection de secrets
     }
   ],
@@ -15,5 +15,7 @@ export const environment = {
   apiUrl: 'https://your-api-domain.com/api',
   
   firebase: {
+    // Les vraies valeurs seront injectées par les variables d'environnement Netlify
+    // Aucune donnée sensible ici
   }
 };
