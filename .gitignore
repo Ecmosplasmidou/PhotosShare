@@ -46,3 +46,5 @@ Thumbs.db
 .env.local
 .env.production
 .env.staging
+environment.ts
+environment.prod.ts
