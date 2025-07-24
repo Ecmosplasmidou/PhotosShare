@@ -1,0 +1,19 @@
+<div class="feed-container">
+    <div class="feed-header">
+        <h1>📸 Feed PhotoShare</h1>
+        <p class="feed-subtitle">Découvrez les derniers moments partagés</p>
+    </div>
+    
+    <div class="feed-content">
+        @for(faceSnap of faceSnaps; track faceSnap.id) {
+            <app-face-snap [faceSnap]="faceSnap"/>
+        } @empty {
+            <div class="empty-feed">
+                <div class="empty-icon">📷</div>
+                <h3>Aucune photo pour le moment</h3>
+                <p>Soyez le premier à partager un moment !</p>
+                <a routerLink="/create" class="create-first-btn">Créer mon premier post</a>
+            </div>
+        }
+    </div>
+</div>

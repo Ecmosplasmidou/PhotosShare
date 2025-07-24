@@ -1,0 +1,54 @@
+<footer class="footer">
+  <div class="footer-content">
+    <!-- Section principale avec titre sur desktop, version simplifiée sur mobile -->
+    <div class="footer-section main-section">
+      <h3 class="footer-title">PhotoShare</h3>
+      <p class="footer-description desktop-only">
+        Partagez vos moments les plus précieux avec vos proches.
+        Créez, gérez et découvrez des souvenirs uniques.
+      </p>
+      <p class="footer-description mobile-only">
+        Partagez vos moments précieux.
+      </p>
+    </div>
+    
+    <!-- Navigation - cachée sur très petit écran -->
+    <div class="footer-section navigation-section">
+      <h4>Navigation</h4>
+      <ul class="footer-links">
+        <li><a href="#" routerLink="/">Accueil</a></li>
+        <li><a href="#" routerLink="/facesnaps">Galerie</a></li>
+        <li *ngIf="isLoggedIn()"><a href="#" routerLink="/facesnaps/new">Créer</a></li>
+      </ul>
+    </div>
+    
+    <!-- Fonctionnalités - cachées sur mobile -->
+    <div class="footer-section features-section desktop-only">
+      <h4>Fonctionnalités</h4>
+      <ul class="footer-links">
+        <li>Upload d'images</li>
+        <li>Système de likes</li>
+        <li>Gestion sécurisée</li>
+        <li>Interface responsive</li>
+      </ul>
+    </div>
+    
+    <!-- Contact compact -->
+    <div class="footer-section contact-section">
+      <h4>Contact</h4>
+      <ul class="footer-links">
+        <li class="desktop-only">📧 ecmosdev&#64;gmail.com</li>
+        <li class="desktop-only">🌐 www.photoshare.com</li>
+        <li>📍 Toulouse</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="footer-divider"></div>
+    <div class="footer-copyright">
+      <p>&copy; {{ currentYear }} PhotoShare. Tous droits réservés.</p>
+      <p class="footer-tech desktop-only">Développé avec Angular 18+</p>
+    </div>
+  </div>
+</footer>

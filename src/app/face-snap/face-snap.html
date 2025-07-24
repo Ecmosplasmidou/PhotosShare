@@ -1,0 +1,46 @@
+<article class="post-card">
+    <!-- Header du post avec info utilisateur -->
+    <div class="post-header">
+        <div class="user-info">
+            <div class="user-avatar">
+                {{ getUserInitial() }}
+            </div>
+            <div class="user-details">
+                <h3 class="post-title">{{ faceSnap.title }}</h3>
+                <span class="post-time">{{ getTimeSince(faceSnap.createdAt) }}</span>
+                <span *ngIf="faceSnap.location" class="post-location">📍 {{ faceSnap.location }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu du post -->
+    <div class="post-content">
+        @if(faceSnap.description) {
+            <p class="post-description">{{ faceSnap.description }}</p>
+        }
+        
+        <div class="post-image-container">
+            <img 
+                [src]="faceSnap.imageUrl" 
+                [alt]="faceSnap.title" 
+                class="post-image"
+                (error)="onImageError($event)"
+                (load)="onImageLoad($event)"
+            />
+        </div>
+    </div>
+
+    <!-- Actions du post -->
+    <div class="post-actions">
+        <div class="engagement-stats">
+            <span class="likes">❤️ {{ faceSnap.snaps }}</span>
+            <span class="comments">💬 {{ getCommentsCount() }}</span>
+        </div>
+        
+        <div class="action-buttons">
+            <button (click)="onViewFaceSnap()" class="action-btn primary">
+                Voir le post
+            </button>
+        </div>
+    </div>
+</article>

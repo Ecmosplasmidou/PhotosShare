@@ -1,0 +1,141 @@
+<div class="create-post-container">
+  <div class="create-header">
+    <h1>✨ Créer un nouveau post</h1>
+    <p class="create-subtitle">Partagez votre moment avec la communauté</p>
+  </div>
+  
+  <form [formGroup]="snapForm" (ngSubmit)="onSubmitForm()" class="create-form">
+    <!-- Aperçu en temps réel -->
+    <div class="post-preview">
+      <div class="preview-header">
+        <div class="user-info">
+          <div class="user-avatar">{{ getUserInitial() }}</div>
+          <div class="user-details">
+            <h3 class="preview-title">{{ snapForm.get('title')?.value || 'Titre de votre post' }}</h3>
+          </div>
+        </div>
+      </div>
+      
+      <div class="preview-content">
+        @if(snapForm.get('description')?.value) {
+          <p class="preview-description">{{ snapForm.get('description')?.value }}</p>
+        }
+        
+        <div class="preview-image-container">
+          @if(imagePreview) {
+            <img [src]="imagePreview" alt="Aperçu" class="preview-image">
+          } @else {
+            <div class="preview-placeholder">
+              <span class="placeholder-icon">📷</span>
+              <span class="placeholder-text">Votre image apparaîtra ici</span>
+            </div>
+          }
+        </div>
+        
+        @if(snapForm.get('location')?.value) {
+          <div class="preview-location">📍 {{ snapForm.get('location')?.value }}</div>
+        }
+      </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="form-content">
+      <div class="form-group">
+        <label for="title">Titre de votre post</label>
+        <input 
+          type="text" 
+          id="title" 
+          formControlName="title" 
+          placeholder="Donnez un titre accrocheur à votre post..."
+          class="form-input"
+        >
+        <div *ngIf="snapForm.get('title')?.invalid && snapForm.get('title')?.touched" class="error-message">
+          <span class="error-icon">⚠️</span>
+          Le titre est requis
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea 
+          id="description" 
+          formControlName="description" 
+          rows="3" 
+          placeholder="Racontez l'histoire derrière cette photo..."
+          class="form-textarea"
+        ></textarea>
+        <div *ngIf="snapForm.get('description')?.invalid && snapForm.get('description')?.touched" class="error-message">
+          <span class="error-icon">⚠️</span>
+          La description est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imageFile">Photo</label>
+        <div class="image-upload-zone" [class.has-image]="imagePreview">
+          <input 
+            type="file" 
+            id="imageFile" 
+            accept="image/*" 
+            (change)="onFileSelected($event)"
+            class="file-input"
+          >
+          
+          @if(!imagePreview) {
+            <div class="upload-content">
+              <div class="upload-icon">📸</div>
+              <p class="upload-text">Cliquez pour sélectionner une photo</p>
+              <p class="upload-hint">JPG, PNG, GIF jusqu'à 10MB</p>
+            </div>
+          } @else {
+            <div class="image-preview-container">
+              <img [src]="imagePreview" alt="Aperçu" class="upload-preview">
+              <div class="image-overlay">
+                <button type="button" (click)="removeImage()" class="remove-btn">
+                  <span class="remove-icon">🗑️</span>
+                  Supprimer
+                </button>
+                <label for="imageFile" class="change-btn">
+                  <span class="change-icon">🔄</span>
+                  Changer
+                </label>
+              </div>
+            </div>
+          }
+        </div>
+        <div *ngIf="snapForm.get('imageFile')?.invalid && snapForm.get('imageFile')?.touched" class="error-message">
+          <span class="error-icon">⚠️</span>
+          Une image est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Localisation (optionnel)</label>
+        <div class="location-input-container">
+          <span class="location-icon">📍</span>
+          <input 
+            type="text" 
+            id="location" 
+            formControlName="location" 
+            placeholder="Ajoutez un lieu..."
+            class="form-input location-input"
+          >
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          [disabled]="snapForm.invalid || !selectedFile"
+          class="submit-btn"
+        >
+          Publier le post
+        </button>
+        
+        <button type="button" routerLink="/facesnaps" class="cancel-btn">
+          Annuler
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

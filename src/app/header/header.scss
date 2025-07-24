@@ -1,0 +1,295 @@
+.main-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: relative;
+  }
+
+  .logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1001;
+
+    .logo {
+      margin: 0;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: white;
+    }
+
+    .tagline {
+      margin: 0;
+      font-size: 0.8em;
+      opacity: 0.9;
+      font-style: italic;
+    }
+  }
+
+  // Burger menu (masqué sur desktop)
+  .burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+
+    span {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    &.active {
+      span:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+      }
+      span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+    }
+  }
+
+  // Overlay pour fermer le menu mobile
+  .menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.open {
+      opacity: 1;
+    }
+  }
+
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.3);
+      font-weight: 600;
+    }
+
+    &.btn-primary {
+      background-color: #ff6b6b;
+      font-weight: 600;
+
+      &:hover {
+        background-color: #ff5252;
+        transform: translateY(-2px);
+      }
+    }
+
+    &.btn-login {
+      border: 2px solid rgba(255, 255, 255, 0.5);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: white;
+      }
+    }
+  }
+
+  .user-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 25px;
+
+    .user-name {
+      font-weight: 500;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      .admin-badge {
+        font-size: 16px;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+    }
+
+    .logout-btn {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 0.8em;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: white;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .burger-menu {
+      display: flex;
+    }
+
+    .menu-overlay {
+      display: block;
+    }
+
+    .nav-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+
+      &.open {
+        transform: translateX(0);
+      }
+    }
+
+    .main-nav {
+      flex-direction: column;
+      gap: 20px;
+      animation: slideInFromLeft 0.5s ease-out;
+    }
+
+    .nav-link {
+      font-size: 1.2em;
+      padding: 12px 24px;
+      opacity: 0;
+      animation: fadeInUp 0.3s ease-out forwards;
+      
+      &:nth-child(1) { animation-delay: 0.1s; }
+      &:nth-child(2) { animation-delay: 0.2s; }
+      &:nth-child(3) { animation-delay: 0.3s; }
+    }
+
+    .user-section {
+      flex-direction: column;
+      gap: 15px;
+      animation: slideInFromRight 0.5s ease-out;
+    }
+
+    .user-menu {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .header-container {
+      padding: 15px 20px;
+    }
+
+    .logo-section .logo {
+      font-size: 1.5em;
+    }
+
+    .logo-section .tagline {
+      font-size: 0.7em;
+    }
+  }
+
+  // Animations pour le menu mobile
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}

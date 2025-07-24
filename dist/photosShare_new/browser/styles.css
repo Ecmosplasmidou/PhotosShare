@@ -1,0 +1,17 @@
+/* src/styles.scss */
+* {
+  font-family:
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-optical-sizing: auto;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* angular:styles/global:styles */
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,47 @@
+<header class="main-header">
+    <div class="header-container">
+        <div class="logo-section">
+            <h1 class="logo">PhotosShare</h1>
+            <p class="tagline">Partagez vos moments</p>
+        </div>
+        
+        <!-- Burger menu pour mobile -->
+        <button class="burger-menu" (click)="toggleMenu()" [class.active]="menuOpen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Overlay pour fermer le menu -->
+        <div class="menu-overlay" [class.open]="menuOpen" (click)="closeMenu()"></div>
+        
+        <!-- Navigation desktop et mobile -->
+        <div class="nav-wrapper" [class.open]="menuOpen">
+            <nav class="main-nav">
+                <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link" (click)="closeMenu()">
+                    Accueil
+                </a>
+                <a routerLink="facesnaps" routerLinkActive="active" class="nav-link" (click)="closeMenu()">
+                    Galerie
+                </a>
+                <a *ngIf="isLoggedIn()" routerLink="facesnaps/new" routerLinkActive="active" class="nav-link btn-primary" (click)="closeMenu()">
+                    ➕ Nouveau
+                </a>
+            </nav>
+            <div class="user-section">
+                <a *ngIf="!isLoggedIn()" routerLink="login" routerLinkActive="active" class="nav-link btn-login" (click)="closeMenu()">
+                    Connexion
+                </a>
+                <div *ngIf="isLoggedIn()" class="user-menu">
+                    <span class="user-name">
+                        <span *ngIf="isSuperUser()" class="admin-badge">👑</span>
+                        👤 {{ getCurrentUser()?.username }}
+                    </span>
+                    <button (click)="onLogout()" class="logout-btn">
+                        Déconnexion
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,33 @@
+<div class="login-container">
+  <h2>Connexion</h2>
+  
+  <!-- Message informatif si redirection depuis une page protégée -->
+  <div *ngIf="showAuthMessage" class="auth-message">
+    <div class="message-content">
+      <span class="message-icon">🔒</span>
+      <p>Vous devez être connecté pour accéder à cette page.</p>
+    </div>
+  </div>
+  
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" formControlName="username" placeholder="Votre nom d'utilisateur">
+      <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error">
+        Le nom d'utilisateur est requis
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email :</label>
+      <input type="email" id="email" formControlName="email" placeholder="votre@email.com">
+      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error">
+        Un email valide est requis
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
+    </div>
+  </form>
+</div>
