@@ -48,5 +48,4 @@ Thumbs.db
 .env.staging
 
 # Ne pas ignorer .env.example (il doit être suivi par Git)
-# !.env.example
 environment.prod.ts

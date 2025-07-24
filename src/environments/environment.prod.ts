@@ -4,8 +4,7 @@ export const environment = {
   appVersion: '1.0.0',
   appDescription: 'Partagez vos moments précieux',
   
-  // ⚠️ SÉCURITÉ: Aucun super-utilisateur défini dans le code source public
-  // Les credentials sont gérés uniquement via les variables d'environnement Netlify
+
   superUsers: [
     // Sera peuplé dynamiquement par le service ConfigService
     // à partir des variables d'environnement sécurisées

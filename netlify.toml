@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = "dist/photosShare_new/browser"
 
+# Configuration du scan des secrets
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "NG_APP_NAME,NG_APP_VERSION,NG_APP_DESCRIPTION,NG_APP_API_URL,NG_APP_ENVIRONMENT"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

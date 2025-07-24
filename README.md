@@ -145,7 +145,7 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 **Cassam Mahadawoo**
 - GitHub: [@Ecmosplasmidou](https://github.com/Ecmosplasmidou)
-- Email: cassamb97@gmail.com
+- Email: [contact via GitHub]
 
 ---
 
