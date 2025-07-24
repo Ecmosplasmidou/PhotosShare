@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService, User } from '../services/auth.service';
+import { PageTransitionService } from '../services/page-transition.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,6 +13,8 @@ import { CommonModule } from '@angular/common';
 export class Header implements OnInit, OnDestroy {
 
   menuOpen = false;
+  
+  private pageTransitionService = inject(PageTransitionService);
 
   constructor(
     private authService: AuthService,
@@ -87,7 +90,16 @@ export class Header implements OnInit, OnDestroy {
 
   onLogout(): void {
     this.authService.logout();
-    this.router.navigateByUrl('/');
+    // Navigation avec transition vers l'arrière
+    this.navigateWithTransition('/', 'backward');
     this.closeMenu();
+  }
+
+  // Méthode pour naviguer avec une transition personnalisée
+  navigateWithTransition(url: string, direction: 'forward' | 'backward' = 'forward'): void {
+    this.pageTransitionService.startTransition(direction);
+    setTimeout(() => {
+      this.router.navigateByUrl(url);
+    }, 100); // Petit délai pour que l'animation commence avant la navigation
   }
 }

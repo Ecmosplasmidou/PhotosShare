@@ -2,9 +2,9 @@
   <!-- Header du post -->
   <div class="post-header">
     <div class="header-actions">
-      <a routerLink="/facesnaps" class="back-btn">
+      <button (click)="goBackWithAnimation()" class="back-btn">
         <i class="icon">←</i> Retour
-      </a>
+      </button>
       <button *ngIf="canDelete()" (click)="onDelete()" class="delete-btn">
         <i class="icon">🗑️</i> Supprimer
       </button>

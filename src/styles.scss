@@ -1,3 +1,6 @@
+/* Import des animations de transition de page */
+@use './app/styles/page-transitions.scss';
+
 * {
   font-family: Roboto, Helvetica, sans-serif;
   font-optical-sizing: auto;

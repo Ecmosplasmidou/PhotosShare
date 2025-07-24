@@ -1,7 +1,51 @@
-<div class="app-container">
-  <app-header />
-  <main class="main-content">
-    <router-outlet />
+<div class="app-container page-transition-container">
+  <!-- Header avec animation fluide -->
+  <header class="app-header" [class.header-transitioning]="isTransitioning">
+    <app-header />
+  </header>
+  
+  <!-- Contenu principal avec animations améliorées -->
+  <main class="main-content page-content" 
+        [class.transitioning-out-forward]="isTransitioningForward" 
+        [class.transitioning-out-backward]="isTransitioningBackward"
+        [class.transitioning-in]="!isTransitioning"
+        [class.content-transitioning]="isTransitioning">
+    
+    <div class="page-wrapper">
+      <router-outlet />
+    </div>
   </main>
-  <app-footer />
+  
+  <!-- Footer avec animation coordonnée -->
+  <footer class="app-footer" [class.footer-transitioning]="isTransitioning">
+    <app-footer />
+  </footer>
+  
+  <!-- Voile bleu amélioré pour les transitions -->
+  <div class="page-transition-veil" 
+       [class.forward]="isTransitioningForward"
+       [class.backward]="isTransitioningBackward"
+       [class.visible]="isTransitioning">
+    
+    <!-- Barre de progression fluide -->
+    @if (isTransitioning) {
+      <div class="transition-progress">
+        <div class="progress-bar" 
+             [style.transform]="'scaleX(' + (transitionProgress / 100) + ')'">
+        </div>
+        <div class="progress-glow"></div>
+      </div>
+    }
+    
+    <!-- Effet de vague pour plus de fluidité -->
+    <div class="wave-effect" [class.active]="isTransitioning"></div>
+    
+    <!-- Particules d'étoiles pour un effet premium -->
+    <div class="stars-effect" [class.active]="isTransitioning">
+      @for (star of [1,2,3,4,5]; track star) {
+        <div class="star" 
+             [style.animation-delay]="(star * 0.1) + 's'"></div>
+      }
+    </div>
+  </div>
 </div>

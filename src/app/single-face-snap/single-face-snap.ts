@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PhotoShare } from '../models/photoShare';
 import { PhotoSharesService } from '../services/photo-shares.service';
 import { AuthService } from '../services/auth.service';
+import { PageTransitionService } from '../services/page-transition.service';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 
 
@@ -20,6 +21,8 @@ faceSnap!: PhotoShare;
 hasSnapped! : boolean;
 onSnapped! : string;
 commentContent: string = '';
+
+private pageTransitionService = inject(PageTransitionService);
 
 constructor(
   private PhotoSharesService: PhotoSharesService,
@@ -74,6 +77,14 @@ onSnap() {
 
   getCurrentUser() {
     return this.authService.getCurrentUser();
+  }
+
+  // Navigation avec animation vers l'arrière
+  goBackWithAnimation(): void {
+    this.pageTransitionService.startTransition('backward');
+    setTimeout(() => {
+      this.router.navigateByUrl('/face-snaps');
+    }, 100);
   }
 
   getCurrentUserInitial(): string {

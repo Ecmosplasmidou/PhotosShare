@@ -1,0 +1,199 @@
+/* Effet de transition de page avec voile bleu - Version fluide et intégrée */
+
+.page-transition-container {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Voile bleu pour les transitions - Version plus subtile */
+.page-transition-veil {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.95) 0%, 
+    rgba(118, 75, 162, 0.95) 100%);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-100%) skewX(-15deg);
+  transform-origin: top left;
+  will-change: transform, opacity;
+  backdrop-filter: blur(2px);
+}
+
+/* Animation vers l'avant - Plus fluide */
+.page-transition-veil.forward {
+  animation: slideForwardFluide 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Animation vers l'arrière - Plus fluide */
+.page-transition-veil.backward {
+  animation: slideBackwardFluide 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideForwardFluide {
+  0% {
+    transform: translateX(-120%) skewX(-15deg) scale(0.9);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(-20%) skewX(-8deg) scale(0.98);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(0%) skewX(0deg) scale(1);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(20%) skewX(8deg) scale(0.98);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(120%) skewX(15deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes slideBackwardFluide {
+  0% {
+    transform: translateX(120%) skewX(15deg) scale(0.9);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(20%) skewX(8deg) scale(0.98);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(0%) skewX(0deg) scale(1);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(-20%) skewX(-8deg) scale(0.98);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-120%) skewX(-15deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Animation pour le contenu de la page - Plus subtile */
+.page-content {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              opacity 0.4s ease-out,
+              filter 0.4s ease-out;
+}
+
+.page-content.transitioning-out-forward {
+  transform: translateX(-15px) scale(0.98);
+  opacity: 0.8;
+  filter: blur(1px);
+}
+
+.page-content.transitioning-out-backward {
+  transform: translateX(15px) scale(0.98);
+  opacity: 0.8;
+  filter: blur(1px);
+}
+
+.page-content.transitioning-in {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Effet de particules pour renforcer l'animation */
+.page-transition-veil::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.3) 70%,
+    transparent 100%);
+  animation: shineWave 0.6s ease-out;
+  transform: skewX(-15deg);
+}
+
+@keyframes shineWave {
+  0% { 
+    left: -100%; 
+    opacity: 0;
+  }
+  50% { 
+    left: 0%; 
+    opacity: 1;
+  }
+  100% { 
+    left: 100%; 
+    opacity: 0;
+  }
+}
+
+/* Optimisations pour mobile */
+@media (max-width: 768px) {
+  .page-transition-veil {
+    backdrop-filter: blur(1px); /* Moins de blur sur mobile */
+  }
+  
+  @keyframes slideForwardFluide {
+    0% {
+      transform: translateX(-110%) skewX(-10deg) scale(0.95);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(0%) skewX(0deg) scale(1);
+      opacity: 0.85;
+    }
+    100% {
+      transform: translateX(110%) skewX(10deg) scale(0.95);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideBackwardFluide {
+    0% {
+      transform: translateX(110%) skewX(10deg) scale(0.95);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(0%) skewX(0deg) scale(1);
+      opacity: 0.85;
+    }
+    100% {
+      transform: translateX(-110%) skewX(-10deg) scale(0.95);
+      opacity: 0;
+    }
+  }
+
+  .page-content.transitioning-out-forward,
+  .page-content.transitioning-out-backward {
+    transform: scale(0.99);
+    filter: none; /* Pas de blur sur mobile pour les performances */
+  }
+}
+
+/* Animation d'entrée pour les nouvelles pages */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-content.page-entering {
+  animation: pageEnter 0.3s ease-out forwards;
+}
