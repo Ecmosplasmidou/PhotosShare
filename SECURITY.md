@@ -1,13 +1,56 @@
-# 🔐 Configuration de Sécurité - PhotoShare
+# � Configuration Sécurisée - PhotoShare
 
-## 📋 Variables d'Environnement
+## ⚠️ IMPORTANT - Sécurité des Super-Utilisateurs
 
-### 🚀 Installation
-1. Copiez le fichier `.env.example` vers `.env`
-2. Modifiez les valeurs selon votre configuration
-3. **IMPORTANT** : Ne commitez jamais le fichier `.env` dans Git
+**Ce dépôt est PUBLIC** - Aucun credential sensible n'est stocké dans le code source.
 
+### �️ Configuration des Super-Utilisateurs
+
+Les super-utilisateurs sont configurés **uniquement** via les variables d'environnement :
+
+#### Pour le développement local :
+1. Créez un fichier `.env.local` (ignoré par Git)
+2. Ajoutez vos variables :
 ```bash
+NG_APP_SUPER_USER_1_USERNAME=votre_username
+NG_APP_SUPER_USER_1_EMAIL=votre@email.com
+```
+
+#### Pour la production (Netlify) :
+1. Allez dans Site Settings → Environment variables
+2. Configurez :
+   - `NG_APP_SUPER_USER_1_USERNAME`
+   - `NG_APP_SUPER_USER_1_EMAIL`
+
+### 🔍 Vérification de Sécurité
+
+- ✅ Aucun credential dans `environment.ts`
+- ✅ Aucun credential dans `environment.prod.ts`
+- ✅ Fichier `.env` ignoré par Git
+- ✅ Variables sensibles dans `.env.local` ou Netlify uniquement
+
+### 🚨 En cas de leak accidentel
+
+Si des credentials sensibles sont accidentellement commités :
+
+1. **Changez immédiatement les mots de passe**
+2. Supprimez les credentials du code
+3. Utilisez `git filter-branch` pour nettoyer l'historique
+4. Force push le dépôt nettoyé
+
+### 📋 Checklist de Sécurité
+
+- [ ] Aucun email personnel dans le code
+- [ ] Aucun username réel dans le code  
+- [ ] Variables sensibles dans Netlify uniquement
+- [ ] `.env.local` dans `.gitignore`
+- [ ] Tests de sécurité passés
+
+## 🎯 Principe de Sécurité
+
+> **"Jamais de secrets dans le code public"**
+
+Tous les credentials sont gérés par des variables d'environnement externes.
 cp .env.example .env
 ```
 

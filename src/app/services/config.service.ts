@@ -30,9 +30,32 @@ export class ConfigService {
     return environment.apiUrl;
   }
 
-  // Configuration des super-utilisateurs
+  // Configuration des super-utilisateurs (sécurisée)
   get superUsers(): Array<{ username: string; email: string }> {
-    return environment.superUsers;
+    // En production, les super-utilisateurs sont récupérés depuis les variables d'environnement
+    // pour des raisons de sécurité (aucun credential dans le code source public)
+    
+    if (this.isProduction) {
+      // Variables d'environnement Netlify injectées au build
+      const username = (globalThis as any).NG_APP_SUPER_USER_1_USERNAME;
+      const email = (globalThis as any).NG_APP_SUPER_USER_1_EMAIL;
+      
+      if (username && email) {
+        return [{ username, email }];
+      }
+      
+      // Fallback sécurisé : aucun super-utilisateur si variables non configurées
+      console.warn('🚨 Variables d\'environnement super-utilisateur non configurées');
+      return [];
+    }
+    
+    // En développement, permettre un accès de test (non sensible)
+    return [
+      { 
+        username: 'dev_test', 
+        email: 'test@localhost' 
+      }
+    ];
   }
 
   // Configuration Firebase (pour future utilisation)
@@ -42,7 +65,14 @@ export class ConfigService {
 
   // Méthodes utilitaires
   isSuperUser(username: string, email: string): boolean {
-    return this.superUsers.some(
+    const superUsers = this.superUsers;
+    
+    if (superUsers.length === 0) {
+      console.warn('🚨 Aucun super-utilisateur configuré');
+      return false;
+    }
+    
+    return superUsers.some(
       superUser => superUser.username === username && superUser.email === email
     );
   }
@@ -55,7 +85,7 @@ export class ConfigService {
       console.log('🔢 Version:', this.appVersion);
       console.log('📝 Description:', this.appDescription);
       console.log('🌐 API URL:', this.apiUrl);
-      console.log('👥 Super-utilisateurs:', this.superUsers);
+      console.log('👥 Super-utilisateurs configurés:', this.superUsers.length > 0);
       console.log('🔥 Firebase:', this.firebaseConfig);
       console.groupEnd();
     }

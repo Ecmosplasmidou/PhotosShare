@@ -4,11 +4,11 @@ export const environment = {
   appVersion: '1.0.0',
   appDescription: 'Partagez vos moments précieux',
   
+  // ⚠️ SÉCURITÉ: Aucun super-utilisateur défini dans le code source public
+  // Les credentials sont gérés uniquement via les variables d'environnement Netlify
   superUsers: [
-    {
-      username: 'admin',
-      email: 'admin@photoshare.app' // Email générique pour éviter la détection de secrets
-    }
+    // Sera peuplé dynamiquement par le service ConfigService
+    // à partir des variables d'environnement sécurisées
   ],
   
   // Configuration API (pour production)

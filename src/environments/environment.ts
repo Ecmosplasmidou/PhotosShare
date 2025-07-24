@@ -4,13 +4,12 @@ export const environment = {
   appVersion: '1.0.0',
   appDescription: 'Partagez vos moments précieux',
   
-  // Configuration des super-utilisateurs (valeurs de développement non sensibles)
+  // Configuration des super-utilisateurs
+  // ⚠️ Les super-utilisateurs sont configurés via les variables d'environnement
+  // pour des raisons de sécurité - aucun credential dans le code source
   superUsers: [
-    {
-      username: 'dev_admin',
-      email: 'admin@localhost.dev'
-    }
-    // Ajoutez d'autres super-utilisateurs ici
+    // Les valeurs réelles seront injectées depuis les variables d'environnement
+    // Voir .env.example pour la configuration requise
   ],
   
   // Configuration API (pour futur backend)
