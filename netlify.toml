@@ -1,6 +1,6 @@
 [build]
   publish = "dist/photosShare_new/browser"
-  command = "ng build --configuration=production"
+  command = "npm run build -- --configuration=production"
 
 [build.environment]
   NODE_VERSION = "18"
