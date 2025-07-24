@@ -1,6 +1,5 @@
 [build]
   publish = "dist/photosShare_new/browser"
-  command = "npm install && npm run build"
 
 [build.environment]
   NODE_VERSION = "20"
