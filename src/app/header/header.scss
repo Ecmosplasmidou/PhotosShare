@@ -85,9 +85,11 @@
     z-index: 999;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none; /* Évite de bloquer les interactions par défaut */
 
     &.open {
       opacity: 1;
+      pointer-events: auto; /* Active les interactions seulement quand ouvert */
     }
   }
 

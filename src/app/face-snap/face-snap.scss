@@ -158,6 +158,15 @@
       cursor: pointer;
       transition: all 0.2s ease;
       text-decoration: none;
+      
+      /* Améliorations mobile */
+      @media (max-width: 768px) {
+        min-height: 44px; /* Taille tactile recommandée */
+        padding: 12px 20px;
+        font-size: 14px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(102, 126, 234, 0.1);
+      }
 
       .icon {
         font-size: 14px;

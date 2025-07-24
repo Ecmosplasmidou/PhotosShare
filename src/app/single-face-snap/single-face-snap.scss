@@ -184,6 +184,7 @@
   background: #fafbfc;
   margin-top: 25px;
   border-top: 1px solid #e9ecef;
+  overflow: hidden; /* Empêche le débordement horizontal */
   
   .comments-header {
     padding: 20px 20px 16px 20px;
@@ -222,6 +223,7 @@
 
       .comment-input-container {
         flex: 1;
+        min-width: 0; /* Permet au flex item de se réduire en dessous de sa taille de contenu */
         
         .comment-input {
           width: 100%;
@@ -233,6 +235,16 @@
           min-height: 44px;
           font-family: inherit;
           transition: border-color 0.2s ease;
+          box-sizing: border-box; /* Correction pour éviter le débordement */
+          
+          /* Améliorations spécifiques mobile pour textarea de commentaires */
+          @media (max-width: 768px) {
+            font-size: 16px; /* Évite le zoom iOS mais respecte le design */
+            padding: 14px 16px;
+            min-height: 50px; /* Légèrement plus grand pour le tactile */
+            border-radius: 8px;
+            touch-action: manipulation;
+          }
 
           &:focus {
             outline: none;
@@ -255,6 +267,15 @@
           cursor: pointer;
           margin-top: 8px;
           transition: all 0.2s ease;
+          
+          /* Améliorations mobile pour le bouton de commentaire */
+          @media (max-width: 768px) {
+            min-height: 44px; /* Taille tactile appropriée */
+            padding: 12px 20px;
+            font-size: 15px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(102, 126, 234, 0.1);
+          }
 
           &:hover:not(:disabled) {
             transform: translateY(-1px);
@@ -432,5 +453,17 @@
       width: 32px;
       height: 32px;
     }
+    
+    .comment-input-container {
+      .comment-input {
+        width: 100%;
+        max-width: 100%; /* Force la largeur maximale */
+        padding: 12px 14px; /* Réduction du padding pour éviter le débordement */
+      }
+    }
+  }
+
+  .comments-section .add-comment {
+    padding: 15px; /* Réduction du padding global sur mobile */
   }
 }

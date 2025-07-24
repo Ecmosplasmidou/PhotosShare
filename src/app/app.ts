@@ -28,6 +28,15 @@ export class App implements OnInit {
       console.log('%c3. Rechargez la page', 'color: #28a745; font-weight: bold;');
       console.log('');
       console.log('Pour supprimer la configuration: configService.clearTempSuperUser()');
+      
+      // Debug mobile - fonction utilitaire
+      (window as any).debugMobile = () => {
+        document.body.classList.toggle('debug-mobile');
+        console.log('Debug mobile activé/désactivé - Les zones tactiles sont maintenant visibles');
+      };
+      
+      console.log('');
+      console.log('🔧 Pour débugger les problèmes mobile: tapez debugMobile()');
     }
   }
 }
