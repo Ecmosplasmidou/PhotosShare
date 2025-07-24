@@ -1,0 +1,23 @@
+[build]
+  publish = "dist/photosShare_new/browser"
+  command = "ng build --configuration=production"
+
+[build.environment]
+  NODE_VERSION = "18"
+  SECRETS_SCAN_OMIT_KEYS = "email,gmail,@gmail.com,cassamb97@gmail.com,NG_APP_SUPER_USER_1_EMAIL"
+  SECRETS_SCAN_OMIT_PATHS = "src/environments/*,dist/**/environment*,.env,.env.*"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.environment]
+  NODE_ENV = "production"
+  SECRETS_SCAN_OMIT_KEYS = "email,gmail"
+  SECRETS_SCAN_OMIT_PATHS = "src/environments/*,dist/**/environment*"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "staging"
+  SECRETS_SCAN_OMIT_KEYS = "email,gmail"
+  SECRETS_SCAN_OMIT_PATHS = "src/environments/*,dist/**/environment*"
