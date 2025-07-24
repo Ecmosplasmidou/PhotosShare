@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 📸 PhotoShare
 
 > **Partagez vos moments précieux avec vos proches**
@@ -149,3 +150,36 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 ---
 
 ⭐ N'hésitez pas à mettre une étoile si ce projet vous plaît !
+- 🔄 **Multi-environnement** (dev/production)
+
+## 🛠️ Technologies Utilisées
+
+- **Frontend**: Angular 18+, TypeScript, SCSS
+- **Styling**: CSS Grid, Flexbox, Animations CSS
+- **Architecture**: Standalone Components, Services, Guards
+- **Stockage**: LocalStorage (évolutif vers Firebase)
+- **Sécurité**: Variables d'environnement, AuthGuard
+
+## 🚀 Installation & Démarrage
+
+### Prérequis
+- Node.js 18+
+- npm ou yarn
+- Angular CLI
+
+### Installation
+```bash
+# Cloner le repository
+git clone https://github.com/votre-username/photoshare.git
+cd photoshare
+
+# Installer les dépendances
+npm install
+
+# Configurer l'environnement
+cp .env.example .env
+# Modifiez .env avec vos configurations
+
+# Démarrer le serveur de développement
+ng serve
+```
