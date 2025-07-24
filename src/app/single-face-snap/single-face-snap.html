@@ -2,7 +2,7 @@
   <!-- Header du post -->
   <div class="post-header">
     <div class="header-actions">
-      <button (click)="goBackWithAnimation()" class="back-btn">
+      <button (click)="goBack()" class="back-btn">
         <i class="icon">←</i> Retour
       </button>
       <button *ngIf="canDelete()" (click)="onDelete()" class="delete-btn">
