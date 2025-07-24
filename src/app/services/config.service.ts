@@ -51,10 +51,12 @@ export class ConfigService {
   logConfiguration(): void {
     if (!this.isProduction) {
       console.group('🔧 Configuration de l\'application');
-      console.log('📱 App:', this.appName, 'v' + this.appVersion);
+      console.log('📱 Nom:', this.appName);
+      console.log('🔢 Version:', this.appVersion);
+      console.log('📝 Description:', this.appDescription);
       console.log('🌐 API URL:', this.apiUrl);
-      console.log('👑 Super Users:', this.superUsers.length, 'configuré(s)');
-      console.log('🏭 Production:', this.isProduction);
+      console.log('👥 Super-utilisateurs:', this.superUsers);
+      console.log('🔥 Firebase:', this.firebaseConfig);
       console.groupEnd();
     }
   }
