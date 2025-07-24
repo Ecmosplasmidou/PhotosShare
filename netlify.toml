@@ -3,7 +3,7 @@
   command = "npm run build -- --configuration=production"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   SECRETS_SCAN_OMIT_KEYS = "email,gmail,@gmail.com,cassamb97@gmail.com,NG_APP_SUPER_USER_1_EMAIL"
   SECRETS_SCAN_OMIT_PATHS = "src/environments/*,dist/**/environment*,.env,.env.*"
 
